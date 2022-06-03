@@ -1,0 +1,10 @@
+{% block content %}
+<center>
+    <form method="GET">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field.label }} {{ field }}
+        {% endfor %}
+    </form>
+</center>
+{% endblock %}
