@@ -17,13 +17,11 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path, include
 
-from scraper import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls'), {'next_page': '/'}, name='login'),
     path('', LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('scraper/', include('scraper.urls')),
-
+    path('profile/', include('userprofile.urls')),
 
 ]

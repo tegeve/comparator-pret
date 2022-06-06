@@ -9,8 +9,22 @@
         <div class="row">
             <div class="col-md-12">
                 <nav>
-                    <a class="btn" href="/admin">Admin</a>
+                    {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary" href="/scraper/">CAUTARE</a>
+                    <a class="btn btn-primary" href="/admin">Admin</a>
+                    <a class="btn btn-primary" href="{% url 'scraper:results_view' %}">Produse active</a>
+                    <a class="btn btn-primary" href="{% url 'scraper:produse_inactive' %}">Produse sterse</a>
+                    <a class="btn btn-primary" href="{% url 'userprofile:utilizator_nou' %}">Adaugare utilizator</a>
+                    {% if ready_to_work is False %}
+                    <a href="{% url 'userprofile:oprire_pontaj' %}" class="btn btn-danger">Oprire pontaj</a>
+                    {% else %}
+                    <a href="{% url 'userprofile:start_pontaj' %}" class="btn btn-success">Pornire pontaj</a>
+                    {% endif %}
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+                    {% endif %}
+                    <span><strong>Hi, {{ request.user.username }}</strong></span>
                 </nav>
+
             </div>
         </div>
     </div>

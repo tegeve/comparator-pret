@@ -12,8 +12,34 @@ class ScraperAltexEmag:
         self.descriere_altex = None
         self.pret_produs_emag = None
         self.cod_produs = cod_produs
+        self.pret_emag = None
+        self.pret_altex = None
+
+    def perform_scrapping(self):
         self.pret_emag = self.scraper_emag()
         self.pret_altex = self.scraper_altex()
+
+    def get_pret_emag(self):
+        return self.pret_emag[-1]
+
+    def get_descriere_altex(self):
+        return self.descriere_altex[0:-1]
+
+    def get_pret_altex(self):
+        return self.pret_altex[-1]
+
+    def has_performed_scrapping(self):
+        return self.pret_emag is not None and self.pret_altex is not None
+
+    def pret_altex(self):
+        return self.pret_altex()
+
+    def scrapping_img(self):
+        browser = webdriver.Chrome(ChromeDriverManager().install())
+        browser.get(f'https://altex.ro/cauta/?q={self.cod_produs}')
+        imagine = browser.find_element(by=By.XPATH,
+                                                 value=f'//*[@id="__next"]/div[2]/div[1]/main/div[2]/div/div['
+                                                       f'2]/div/ul[2]/li/a/div[5]/div/div[2]')
 
     def scraper_emag(self):
         browser = webdriver.Chrome(ChromeDriverManager().install())
@@ -71,8 +97,6 @@ class ScraperAltexEmag:
         pd.set_option('display.expand_frame_repr', False)
         pd.set_option('max_colwidth', None)
         return f'{self.df_sortat_pret}'
-
-
 
 
 
