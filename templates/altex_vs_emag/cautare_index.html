@@ -17,7 +17,7 @@
             </thead>
             <tbody>
 
-            {% for item in scraper %}
+            {% for item in scraper reversed %}
                 <tr>
                     <td>{{ forloop.counter0|add:page_obj.start_index }}</td>
                     <td>

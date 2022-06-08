@@ -27,7 +27,7 @@ class ScraperAltexEmag:
         return self.descriere_altex[0:-1]
 
     def get_pret_altex(self):
-        return self.pret_altex[-1]
+        return self.pret_altex[-2]
 
     def has_performed_scrapping(self):
         return self.pret_emag is not None and self.pret_altex is not None
