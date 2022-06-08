@@ -9,6 +9,8 @@
                 <th><strong>Descriere</strong></th>
                 <th><strong>Pret Emag</strong></th>
                 <th><strong>Pret Altex</strong></th>
+                <th><strong>Imagine Produs</strong></th>
+
                 <th>Stare</th>
                 <th><strong>Actiune</strong></th>
              </tr>
@@ -19,17 +21,21 @@
                 <tr>
                     <td>{{ forloop.counter0|add:page_obj.start_index }}</td>
                     <td>
-                        {{ item.cod_produs}}
+                        {{ item.cod_produs }}
                     </td>
                     <td>
-                        {{ item.descriere}}
+                        {{ item.descriere }}
                     </td>
 
                     <td>
-                        {{ item.pret_emag}}
+                        {{ item.pret_emag }}
                     </td>
                     <td>
                         {{ item.pret_altex }}
+                    </td>
+
+                    <td>
+                        <img src="{{item.imagine}}"  width="100" height="120">
                     </td>
                     <td>{% if item.active == 1 %}
                             <span>Activ</span>
