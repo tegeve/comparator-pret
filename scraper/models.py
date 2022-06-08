@@ -9,6 +9,8 @@ class Produse(models.Model):
     pret_altex = models.CharField(max_length=100)
     pret_emag = models.CharField(max_length=100)
     imagine = models.ImageField(null=True, blank=True)
+    url_altex = models.URLField(null=True, blank=True)
+    url_emag = models.URLField(null=True, blank=True)
 
 
     def __str__(self):

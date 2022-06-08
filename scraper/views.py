@@ -25,6 +25,8 @@ class SearchView(LoginRequiredMixin, CreateView):
         to_edit.pret_emag = scrapper.get_pret_emag()
         to_edit.descriere = scrapper.get_descriere_altex()
         to_edit.imagine = scrapper.get_imagine()
+        to_edit.url_altex = scrapper.get_url_altex()
+        to_edit.url_emag = scrapper.get_url_emag()
         to_edit.save()
         print(scrapper)
         return reverse("scraper:results_view")
@@ -33,7 +35,7 @@ class SearchView(LoginRequiredMixin, CreateView):
 class ResultView(LoginRequiredMixin, ListView):
     model = Produse
     template_name = 'altex_vs_emag/cautare_index.html'
-    fields = ['cod_produs', 'descriere', 'pret_emag', 'pret_altex', 'imagine']
+    fields = ['cod_produs', 'descriere', 'pret_emag', 'pret_altex', 'imagine', 'url_altex']
     paginate_by = 5
     queryset = model.objects.filter(active=1)
     context_object_name = 'scraper'

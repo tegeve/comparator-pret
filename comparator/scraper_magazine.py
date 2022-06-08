@@ -8,6 +8,8 @@ import pandas as pd
 class ScraperAltexEmag:
 
     def __init__(self, cod_produs):
+        self.url_emag = None
+        self.url_altex = None
         self.imagine = None
         self.descriere_emag = None
         self.descriere_altex = None
@@ -35,6 +37,12 @@ class ScraperAltexEmag:
     def get_imagine(self):
         return self.imagine
 
+    def get_url_altex(self):
+        return self.url_altex
+
+    def get_url_emag(self):
+        return self.url_emag
+
     def scraper_emag(self):
         browser = webdriver.Chrome(ChromeDriverManager().install())
         browser.get('https://www.emag.ro/#opensearch')
@@ -47,6 +55,8 @@ class ScraperAltexEmag:
             self.pret_produs_emag = browser.find_element(by=By.XPATH,
                                                          value=f'//*[@id="card_grid"]/div/div/div/div[4]/div[1]/p[2]')
             self.pret_emag = self.pret_produs_emag.text.removesuffix(' Lei')
+            url_emag = browser.find_element(by=By.XPATH, value='//*[@id="card_grid"]/div/div/div/div[3]/div/a')
+            self.url_emag = url_emag.get_attribute('href')
             return self.descriere_emag[0], self.pret_emag
         except NoSuchElementException:
             pass
@@ -64,6 +74,9 @@ class ScraperAltexEmag:
                                        value=('//*[@id="__next"]/div[2]/div[1]/main/div[2]/div/div[2]/div/ul['
                                               '2]/li/a/div[ '
                                               '1]/img'))
+        url_altex = browser.find_element(by=By.XPATH, value=('//*[@id="__next"]/div[2]/div[1]/main/div[2]/div/div['
+                                                             '2]/div/ul[2]/li/a'))
+        self.url_altex = url_altex.get_attribute('href')
         self.imagine = imagine.get_attribute('src')
         self.descriere_altex = descriere_produs_altex.text.split('\n')[0]
         self.pret_altex = pret_produs_altex.text.removesuffix(' lei')
